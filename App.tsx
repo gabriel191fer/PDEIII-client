@@ -163,6 +163,36 @@ export default function App() {
             alignItems: 'center'
           }}
         >
+        <View style={{
+          backgroundColor: 'gray',
+          width: 411,
+          height: 60,
+          top: -10
+        }}>
+          <Text style={{
+            fontSize:30,
+            paddingTop: 7,
+            paddingLeft: 10
+            }}>
+            Analisador de Tomates
+          </Text>
+          
+        </View>
+          <Text
+          style={{
+            padding: 15,
+            fontSize: 18,
+            textAlign: 'center'
+          }}
+          >
+          Bem vindo ao nosso ambiente de avaliação de doenças em tomates, para prosseguir, bata uma foto, ou carregue uma foto da sua galeria.
+          </Text>
+          <Image source={require('./images/tomato.png')} style={{
+            height:300,
+            width: 300,
+            margin: 25
+          }} />
+
           <TouchableOpacity
             onPress={__startCamera}
             style={{
@@ -182,9 +212,46 @@ export default function App() {
                 textAlign: 'center'
               }}
             >
-              Take picture
+              Tirar Foto
             </Text>
+
+            
+          
           </TouchableOpacity>
+          <TouchableOpacity
+            //onPress={__startCamera}
+            style={{
+              width: 130,
+              //borderRadius: 4,
+              backgroundColor: '#14274e',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+              height: 40,
+              margin: 10,
+            }}
+          >
+            <Text
+              style={{
+                color: '#fff',
+                fontWeight: 'bold',
+                textAlign: 'center'
+              }}
+            >
+              Carregar Imagem
+            </Text>
+
+            
+          
+          </TouchableOpacity>
+          <Text
+            style={{
+              bottom: 0,
+              marginTop: 30
+            }}
+            >
+              powered by m0b1us
+            </Text>
         </View>
       )}
 
