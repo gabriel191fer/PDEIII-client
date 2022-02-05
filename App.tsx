@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Image, View, Platform, TouchableOpacity, Text, StyleSheet, Pressable } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+import base64 from 'react-native-base64'
+
 
 const axios = require('axios').default;
 
@@ -25,16 +27,15 @@ export default function ImagePickerExample() {
   };
 
   const uploadImage = async () => {
-    // Check if any file is selected or not
+    base64.encode(image);
     if (image != null) {
-      // If file selected then create FormData
       const fileToUpload = image;
       const data = new FormData();
       data.append('image', fileToUpload);
 
-      const test = await axios.post('http://tomatoapi-env.eba-pnwe8e3p.us-east-1.elasticbeanstalk.com/leaf',{
+      const test = await axios.post('http://tomatoapi-env.eba-pnwe8e3p.us-east-1.elasticbeanstalk.com/leaf', {
         data: data,
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: { "Content-Type": "application/json" },
       });
 
       console.log('dados : ', test)
@@ -59,46 +60,43 @@ export default function ImagePickerExample() {
     }
   };
 
+
   return (
+
+
     <View>
+      <Text style={{
+        marginTop: 15,
+        textAlign: 'center',
+        fontSize: 25,
+        backgroundColor: 'gray',
+        paddingBottom: 10,
+        paddingTop: 10
+      }}>
+        Analisador de Tomates
+      </Text>
+      <Image source={require('./images/tomato.png')} style={{ height: 300, width: 300, alignSelf: 'center', marginTop: 50 }} />
 
-      
-    <Text style={{
-          marginTop:15,
-          textAlign:'center',
-          fontSize:25,
-          backgroundColor: 'gray',
-          paddingBottom: 10,
-          paddingTop: 10
-        }}>
-          Analisador de Tomates
+
+
+      <Pressable style={{ width: 120, height: 40, backgroundColor: 'gray', alignSelf: 'center', borderRadius: 5, marginBottom: 10, marginTop: 50 }} onPress={pickImage}>
+        <Text style={{ textAlign: 'center' }}>
+          Selecionar Imagem
         </Text>
-        <Image source={require('./images/tomato.png')} style={{ height: 300, width: 300, alignSelf: 'center', marginTop: 50}} />
-    
-      
-
-      <Pressable style={{ width: 120, height:40, backgroundColor: 'gray', alignSelf:'center', borderRadius: 5, marginBottom: 10, marginTop: 50}} onPress={pickImage}>
-          <Text style={{ textAlign: 'center' }}>
-            Selecionar Imagem
-          </Text>
       </Pressable>
       {/*{image && <Image source={{ uri: image }} style={{ width: 256, height: 256 }} />} */}
 
-      <Pressable style={{ width: 120, height:35, backgroundColor: 'gray', alignSelf:'center', borderRadius: 5, padding:6}}
+      <Pressable style={{ width: 120, height: 35, backgroundColor: 'gray', alignSelf: 'center', borderRadius: 5, padding: 6 }}
         onPress={uploadImage}>
         <Text style={{ textAlign: 'center' }}>Subir Imagem</Text>
       </Pressable>
 
-      <Text style={{textAlign: 'center', marginTop: 110}}>
+      <Text style={{ textAlign: 'center', marginTop: 110 }}>
         Powered by m0b1us
       </Text>
 
+    </View>
 
-    
-    
-  </View>
-    
   );
-
-  
 }
+
